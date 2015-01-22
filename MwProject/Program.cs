@@ -6,23 +6,23 @@ using System.Threading.Tasks;
 
 namespace MwProject
 {
-	public class Program
-	{
+    public class Program
+    {
 
-		static Dictionary<string,Merchant> MerchantDictionary = new Dictionary<string, Merchant>();
-		
-		static void Main(string[] args)
-		{
-		}
+        static Dictionary<string,Merchant> _merchantDictionary = new Dictionary<string, Merchant>();
+        
+        static void Main(string[] args)
+        {
+        }
 
         /// <summary>
         /// (1)	Finding a Merchant by their MerchantId
         /// </summary>
         public static Merchant GetMerchant(string merchantId)
         {
-            if (doesMerchantExist(merchantId))
+            if (DoesMerchantExist(merchantId))
             {
-                return MerchantDictionary[merchantId]; 
+                return _merchantDictionary[merchantId]; 
             }
             else
             {
@@ -33,33 +33,33 @@ namespace MwProject
         /// <summary>
         /// (2) Finding all Shops belonging to a given Merchant 
         /// </summary>
-        public static Dictionary<string,Shop> findShopsByMerchant(string merchantId)
+        public static Dictionary<string,Shop> FindShopsByMerchant(string merchantId)
         {
             return GetMerchant(merchantId).ShopDictionary;
         }
 
-	    
-	    public static bool doesMerchantExist(string id)
-	    {
-	        return MerchantDictionary.ContainsKey(id);
-	    }
+        
+        public static bool DoesMerchantExist(string id)
+        {
+            return _merchantDictionary.ContainsKey(id);
+        }
 
         /// <summary>
         /// (3)	Finding all Shops for a given Merchant Type (i.e. all FastFood shops or all Electronics Shops)
         /// </summary>
-        public static Dictionary<string, Shop> getShopsByMerchantType(string type)
+        public static List<Shop> GetShopsByMerchantType(string type)
         {
-            Dictionary<string, Shop> returnDictionary = new Dictionary<string, Shop>();
+            List<Shop> returnShops = new List<Shop>();
             
-            foreach (string merchantId in MerchantDictionary.Keys)
+            foreach (string merchantId in _merchantDictionary.Keys)
             {
-                if (MerchantDictionary[merchantId].MerchantType.Equals(type, StringComparison.OrdinalIgnoreCase))
+                if (_merchantDictionary[merchantId].MerchantType.Equals(type, StringComparison.OrdinalIgnoreCase))
                 {
-                    // TODO : returnDictionary.Add(, MerchantDictionary[merchantId].ShopDictionary);
+                    returnShops.AddRange(_merchantDictionary[merchantId].ShopDictionary.Values);
                 }
             }
 
-            return returnDictionary;
+            return returnShops;
         }
-	}
+    }
 }

@@ -33,7 +33,7 @@ namespace MwProject
             ShopDictionary.Remove(shop.ShopId);
         }
 
-        public bool IsShopExist(Shop shop)
+        public bool DoesShopExist(Shop shop)
         {
             return ShopDictionary.ContainsKey(shop.ShopId);
         }
