@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace MwProject
 {
-    internal class Shop
+    public class Shop
     {
         public string ShopId { get; private set; }
         public string ShopManager { get; private set; }
 
         public Shop(string id, string manager)
         {
-            ShopId = id;
-            ShopManager = manager;
+            ShopId = String.Copy(id);
+            ShopManager = String.Copy(manager);
         }
     }
 }

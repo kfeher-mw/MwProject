@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MwProject
 {
-    internal class Merchant
+    public class Merchant
     {
         public string MerchantId { get; protected set; }
         public string MerchantName { get; protected set; }
@@ -17,9 +17,9 @@ namespace MwProject
 
         public Merchant(string merchantId, string merchantName, string merchantType)
         {
-            MerchantId = merchantId;
-            MerchantName = merchantName;
-            MerchantType = merchantType;
+            MerchantId = String.Copy(merchantId);
+            MerchantName = String.Copy(merchantName);
+            MerchantType = String.Copy(merchantType);
             ShopDictionary = new Dictionary<string,Shop>();
         }
 
@@ -37,6 +37,7 @@ namespace MwProject
         {
             return ShopDictionary.ContainsKey(shop.ShopId);
         }
+
 
     }
 }
