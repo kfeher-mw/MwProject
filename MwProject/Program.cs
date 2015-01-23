@@ -13,6 +13,8 @@ namespace MwProject
         
         static void Main(string[] args)
         {
+            Merchant m = new Merchant(" ", " ", " ");
+            Console.WriteLine(m.MerchantId);
         }
 
         /// <summary>

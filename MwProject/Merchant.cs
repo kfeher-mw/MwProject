@@ -17,17 +17,23 @@ namespace MwProject
 
         public Merchant(string merchantId, string merchantName, string merchantType)
         {
+
+            if (String.IsNullOrWhiteSpace(merchantId) || String.IsNullOrWhiteSpace(merchantName) || String.IsNullOrWhiteSpace(merchantType))
+            {
+                throw new ArgumentException();
+            }
+            
             MerchantId = String.Copy(merchantId);
             MerchantName = String.Copy(merchantName);
             MerchantType = String.Copy(merchantType);
-            ShopDictionary = new Dictionary<string,Shop>();
+            ShopDictionary = new Dictionary<string, Shop>();
         }
 
-        public bool AddShop(Shop shop)
+        public bool AddShop(Shop newShop)
         {
             try
             {
-                ShopDictionary.Add(shop.ShopId, shop);
+                ShopDictionary.Add(newShop.ShopId, newShop);
                 return true;
             }
 
