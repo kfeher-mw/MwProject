@@ -29,8 +29,6 @@ namespace MwProject
             {
                 return false;
             }
-            else
-
             ShopDictionary.Add(shop.ShopId, shop);
             return DoesShopExist(shop.ShopId);
         }
