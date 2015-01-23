@@ -8,13 +8,19 @@ namespace MwProject
 {
     public class Shop
     {
-        public string ShopId { get; private set; }
-        public string ShopManager { get; private set; }
+        public string ShopId { get; protected set; }
+        public string ShopManager { get; protected set; }
 
-        public Shop(string id, string manager)
+        public Shop(string shopId, string shopManager)
         {
-            ShopId = String.Copy(id);
-            ShopManager = String.Copy(manager);
+
+            if (String.IsNullOrWhiteSpace(shopId) || String.IsNullOrWhiteSpace(shopManager))
+            {
+                throw new ArgumentException();
+            }
+            
+            ShopId = String.Copy(shopId);
+            ShopManager = String.Copy(shopManager);
         }
     }
 }
