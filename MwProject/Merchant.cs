@@ -25,22 +25,47 @@ namespace MwProject
 
         public bool AddShop(Shop shop)
         {
-            if (shop == null || DoesShopExist(shop.ShopId))
+            try
+            {
+                ShopDictionary.Add(shop.ShopId, shop);
+                return true;
+            }
+
+            catch (ArgumentNullException)
             {
                 return false;
             }
-            ShopDictionary.Add(shop.ShopId, shop);
-            return DoesShopExist(shop.ShopId);
+
+            catch (ArgumentException)
+            {
+                return false;
+            }
+
         }
 
         public bool RemoveShop(string shopId)
         {
-            return ShopDictionary.Remove(shopId);
+            try
+            {
+                ShopDictionary.Remove(shopId);
+                return true;
+            }
+            catch (ArgumentNullException)
+            {
+                return false;
+            }
         }
 
         public bool DoesShopExist(string shopId)
         {
-            return ShopDictionary.ContainsKey(shopId);
+            try
+            {
+                return ShopDictionary.ContainsKey(shopId);
+            }
+            catch (ArgumentNullException)
+            {
+                return false;
+            }
         }
 
 
