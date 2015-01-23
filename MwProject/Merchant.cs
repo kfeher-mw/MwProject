@@ -13,7 +13,7 @@ namespace MwProject
         public string MerchantName { get; protected set; }
         public string MerchantType { get; protected set; }
         public Dictionary<string, Shop> ShopDictionary { get;  protected set; }
-
+    
 
         public Merchant(string merchantId, string merchantName, string merchantType)
         {
@@ -23,19 +23,26 @@ namespace MwProject
             ShopDictionary = new Dictionary<string,Shop>();
         }
 
-        public void AddShop(Shop shop)
+        public bool AddShop(Shop shop)
         {
+            if (shop == null || DoesShopExist(shop.ShopId))
+            {
+                return false;
+            }
+            else
+
             ShopDictionary.Add(shop.ShopId, shop);
+            return DoesShopExist(shop.ShopId);
         }
 
-        public void RemoveShop(Shop shop)
+        public bool RemoveShop(string shopId)
         {
-            ShopDictionary.Remove(shop.ShopId);
+            return ShopDictionary.Remove(shopId);
         }
 
-        public bool DoesShopExist(Shop shop)
+        public bool DoesShopExist(string shopId)
         {
-            return ShopDictionary.ContainsKey(shop.ShopId);
+            return ShopDictionary.ContainsKey(shopId);
         }
 
 
