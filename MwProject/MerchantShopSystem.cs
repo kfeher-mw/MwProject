@@ -9,21 +9,22 @@ namespace MwProject
     public class MerchantShopSystem
     {
 
-        static Dictionary<string,Merchant> _merchantDictionary = new Dictionary<string, Merchant>();
-        
-        static void Main(string[] args)
-        {
-            Merchant m = new Merchant("      ", "       ", "       ");
-            Console.WriteLine(m.MerchantId);
-        }
+        private Dictionary<string, Merchant> merchantDictionary;
+        private Dictionary<string, List<Merchant>> merchantsByType;
 
+        public MerchantShopSystem()
+        {
+            merchantDictionary = new Dictionary<string, Merchant>();
+            merchantsByType = new Dictionary<string, List<Merchant>>();
+        }
+        
         
         /// <summary>
         /// (1)	Finding a Merchant by their MerchantId
         /// returns Merchant by their merchantId.
         /// returns null if merchantId cannot be found.
         /// </summary>
-        public static Merchant GetMerchant(string merchantId)
+        public Merchant GetMerchant(string merchantId)
         {
             if (String.IsNullOrWhiteSpace(merchantId))
             {
@@ -32,7 +33,7 @@ namespace MwProject
 
             try
             {
-                return _merchantDictionary[merchantId]; 
+                return merchantDictionary[merchantId]; 
             }
             catch (KeyNotFoundException)
             {
@@ -46,7 +47,7 @@ namespace MwProject
         /// returns the dictionary of shops by their merchant's merchantId
         /// returns null of the merchantId cannot be found.
         /// </summary>
-        public static Dictionary<string,Shop> FindShopsByMerchant(string merchantId)
+        public Dictionary<string,Shop> FindShopsByMerchant(string merchantId)
         {
             if (String.IsNullOrWhiteSpace(merchantId))
             {
@@ -67,26 +68,54 @@ namespace MwProject
         /// (3)	Finding all Shops for a given Merchant Type (i.e. all FastFood shops or all Electronics Shops)
         /// returns the specific type of merchants with their shops.
         /// </summary>
-        public static Dictionary<Merchant,Dictionary<string,Shop>> GetShopsByMerchantType(string merchantType)
+        public List<Shop> GetShopsByMerchantType (string merchantType)
         {
             if (String.IsNullOrWhiteSpace(merchantType))
             {
                 throw new ArgumentNullException();
             }
             
-            Dictionary<Merchant,Dictionary<string,Shop>> returnDictionary = new Dictionary<Merchant, Dictionary<string, Shop>>();
-            
-            foreach (string merchantId in _merchantDictionary.Keys)
+            List<Shop> returnList = new List<Shop>();
+           
+            foreach (Merchant merchant in merchantsByType[merchantType])
             {
-                Merchant aMerchant = _merchantDictionary[merchantId];
-
-                if (aMerchant.MerchantType.Equals(merchantType, StringComparison.OrdinalIgnoreCase))
-                {
-                    returnDictionary.Add(aMerchant, aMerchant.ShopDictionary);
-                }
+                returnList.AddRange(merchant.ShopDictionary.Values);
             }
 
-            return returnDictionary;
+            return returnList;
+        }
+
+        public bool AddMerchant(Merchant newMerchant)
+        {
+            try
+            {
+                merchantDictionary.Add(newMerchant.MerchantId, newMerchant);
+                return true;
+            }
+
+            catch (ArgumentNullException)
+            {
+                return false;
+            }
+
+            catch (ArgumentException)
+            {
+                return false;
+            }
+
+        }
+
+        public bool RemoveMerchant(string merchantId)
+        {
+            try
+            {
+                merchantDictionary.Remove(merchantId);
+                return true;
+            }
+            catch (ArgumentNullException)
+            {
+                return false;
+            }
         }
     }
 }
