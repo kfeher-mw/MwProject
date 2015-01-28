@@ -84,9 +84,21 @@ namespace MwProject
             {
                 return false;
             }
+            
             merchantDictionary.Add(newMerchant.MerchantId, newMerchant);
+            
+            if (merchantsByType.ContainsKey(newMerchant.MerchantType))
+            {
+                merchantsByType[newMerchant.MerchantType].Add(newMerchant);
+            }
+            else
+            {
+                merchantsByType[newMerchant.MerchantType].Add(newMerchant);
+                merchantsByType.Add(newMerchant.MerchantType, new List<Merchant>(){newMerchant});
+            }
+            
             return true;
-        }
+        } 
 
         public bool RemoveMerchant(string merchantId)
         {
