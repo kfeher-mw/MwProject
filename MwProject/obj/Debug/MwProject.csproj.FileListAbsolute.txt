@@ -4,3 +4,5 @@ c:\users\krisztianf\documents\visual studio 2013\Projects\MwProject\MwProject\bi
 c:\users\krisztianf\documents\visual studio 2013\Projects\MwProject\MwProject\bin\Debug\MwProject.pdb
 c:\users\krisztianf\documents\visual studio 2013\Projects\MwProject\MwProject\obj\Debug\MwProject.exe
 c:\users\krisztianf\documents\visual studio 2013\Projects\MwProject\MwProject\obj\Debug\MwProject.pdb
+D:\Git Repos\MwProject\MwProject\bin\Debug\MwProject.exe.config
+D:\Git Repos\MwProject\MwProject\obj\Debug\MwProject.exe

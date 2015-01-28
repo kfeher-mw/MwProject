@@ -28,18 +28,14 @@ namespace MwProject
         {
             if (String.IsNullOrWhiteSpace(merchantId))
             {
-                throw new ArgumentNullException();
-            }
-
-            try
-            {
-                return merchantDictionary[merchantId]; 
-            }
-            catch (KeyNotFoundException)
-            {
                 return null;
             }
-         
+
+            if (merchantDictionary.ContainsKey(merchantId))
+            {
+                return merchantDictionary[merchantId];
+            }
+            return null;
         }
 
         /// <summary>
@@ -51,17 +47,14 @@ namespace MwProject
         {
             if (String.IsNullOrWhiteSpace(merchantId))
             {
-                throw new ArgumentNullException();
+                return null;
             }
 
-            try
+            if (DoesMerchantExist(merchantId))
             {
                 return GetMerchant(merchantId).ShopDictionary;
             }
-            catch (KeyNotFoundException)
-            {
-                return null;
-            }
+            return null;
         }
 
         /// <summary>
@@ -70,9 +63,9 @@ namespace MwProject
         /// </summary>
         public List<Shop> GetShopsByMerchantType (string merchantType)
         {
-            if (String.IsNullOrWhiteSpace(merchantType))
+            if (String.IsNullOrWhiteSpace(merchantType) || !merchantsByType.ContainsKey(merchantType))
             {
-                throw new ArgumentNullException();
+                return null;
             }
             
             List<Shop> returnList = new List<Shop>();
@@ -87,35 +80,32 @@ namespace MwProject
 
         public bool AddMerchant(Merchant newMerchant)
         {
-            try
-            {
-                merchantDictionary.Add(newMerchant.MerchantId, newMerchant);
-                return true;
-            }
-
-            catch (ArgumentNullException)
+            if (newMerchant == null || DoesMerchantExist(newMerchant.MerchantId))
             {
                 return false;
             }
-
-            catch (ArgumentException)
-            {
-                return false;
-            }
-
+            merchantDictionary.Add(newMerchant.MerchantId, newMerchant);
+            return true;
         }
 
         public bool RemoveMerchant(string merchantId)
         {
-            try
-            {
-                merchantDictionary.Remove(merchantId);
-                return true;
-            }
-            catch (ArgumentNullException)
+            if (String.IsNullOrWhiteSpace(merchantId))
             {
                 return false;
             }
+
+            return merchantDictionary.Remove(merchantId);
+        }
+
+        public bool DoesMerchantExist(string merchantId)
+        {
+            if (String.IsNullOrWhiteSpace(merchantId))
+            {
+                return false;
+            }
+
+            return (merchantDictionary.ContainsKey(merchantId));
         }
     }
 }

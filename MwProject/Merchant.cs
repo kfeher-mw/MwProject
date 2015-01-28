@@ -13,17 +13,18 @@ namespace MwProject
         public string MerchantId { get; protected set; }
         public string MerchantName { get; protected set; }
         public string MerchantType { get; protected set; }
-        public Dictionary<string, Shop> ShopDictionary { get;  protected set; }
-    
+        public Dictionary<string, Shop> ShopDictionary { get; protected set; }
+
 
         public Merchant(string merchantId, string merchantName, string merchantType)
         {
 
-            if (String.IsNullOrWhiteSpace(merchantId) || String.IsNullOrWhiteSpace(merchantName) || String.IsNullOrWhiteSpace(merchantType))
+            if (String.IsNullOrWhiteSpace(merchantId) || String.IsNullOrWhiteSpace(merchantName) ||
+                String.IsNullOrWhiteSpace(merchantType))
             {
                 throw new ArgumentException();
             }
-            
+
             MerchantId = String.Copy(merchantId);
             MerchantName = String.Copy(merchantName);
             MerchantType = String.Copy(merchantType);
@@ -32,49 +33,24 @@ namespace MwProject
 
         public bool AddShop(Shop newShop)
         {
-            try
-            {
-                ShopDictionary.Add(newShop.ShopId, newShop);
-                return true;
-            }
-
-            catch (ArgumentNullException)
+            if (newShop == null || ShopDictionary.ContainsValue(newShop))
             {
                 return false;
             }
 
-            catch (ArgumentException)
-            {
-                return false;
-            }
-
+            ShopDictionary.Add(newShop.ShopId, newShop);
+            return true;
         }
 
         public bool RemoveShop(string shopId)
         {
-            try
-            {
-                ShopDictionary.Remove(shopId);
-                return true;
-            }
-            catch (ArgumentNullException)
+
+            if (String.IsNullOrWhiteSpace(shopId))
             {
                 return false;
             }
+
+            return ShopDictionary.Remove(shopId);
         }
-
-        public bool DoesShopExist(string shopId)
-        {
-            try
-            {
-                return ShopDictionary.ContainsKey(shopId);
-            }
-            catch (ArgumentNullException)
-            {
-                return false;
-            }
-        }
-
-
     }
 }
