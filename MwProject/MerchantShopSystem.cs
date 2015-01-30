@@ -12,7 +12,7 @@ namespace MwProject
         private Dictionary<string, Merchant> merchantDictionary;
         private Dictionary<string, List<Merchant>> merchantsByType;
 
-        public MerchantShopSystem(Dictionary<string, Merchant> aMerchantDictionary, Dictionary<string, List<Merchant>> aMerchantByType = null)
+        public MerchantShopSystem(Dictionary<string, Merchant> aMerchantDictionary, Dictionary<string, List<Merchant>> aMerchantByType)
         {
             merchantDictionary = aMerchantDictionary;
             merchantsByType = aMerchantByType;
@@ -88,7 +88,6 @@ namespace MwProject
             }
             else
             {
-                merchantsByType[newMerchant.MerchantType].Add(newMerchant);
                 merchantsByType.Add(newMerchant.MerchantType, new List<Merchant>(){newMerchant});
             }
             
