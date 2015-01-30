@@ -13,7 +13,7 @@ namespace MwProject
         public string MerchantId { get; protected set; }
         public string MerchantName { get; protected set; }
         public string MerchantType { get; protected set; }
-        public Dictionary<string, Shop> ShopDictionary { get; protected set; }
+        internal Dictionary<string, Shop> ShopDictionary { get; private set; }
 
 
         public Merchant(string merchantId, string merchantName, string merchantType)
@@ -22,7 +22,7 @@ namespace MwProject
             if (String.IsNullOrWhiteSpace(merchantId) || String.IsNullOrWhiteSpace(merchantName) ||
                 String.IsNullOrWhiteSpace(merchantType))
             {
-                throw new ArgumentException();
+                throw new ArgumentException("Merchant object constructed with one or more null or empty values!");
             }
 
             MerchantId = String.Copy(merchantId);

@@ -12,10 +12,10 @@ namespace MwProject
         private Dictionary<string, Merchant> merchantDictionary;
         private Dictionary<string, List<Merchant>> merchantsByType;
 
-        public MerchantShopSystem()
+        public MerchantShopSystem(Dictionary<string, Merchant> aMerchantDictionary, Dictionary<string, List<Merchant>> aMerchantByType = null)
         {
-            merchantDictionary = new Dictionary<string, Merchant>();
-            merchantsByType = new Dictionary<string, List<Merchant>>();
+            merchantDictionary = aMerchantDictionary;
+            merchantsByType = aMerchantByType;
         }
         
         
@@ -31,7 +31,7 @@ namespace MwProject
                 return null;
             }
 
-            if (merchantDictionary.ContainsKey(merchantId))
+            if (DoesMerchantExist(merchantId))
             {
                 return merchantDictionary[merchantId];
             }
@@ -45,11 +45,6 @@ namespace MwProject
         /// </summary>
         public Dictionary<string,Shop> FindShopsByMerchant(string merchantId)
         {
-            if (String.IsNullOrWhiteSpace(merchantId))
-            {
-                return null;
-            }
-
             if (DoesMerchantExist(merchantId))
             {
                 return GetMerchant(merchantId).ShopDictionary;

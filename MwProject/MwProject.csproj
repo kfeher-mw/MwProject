@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainClass.cs" />
     <Compile Include="Merchant.cs" />
     <Compile Include="MerchantShopSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
