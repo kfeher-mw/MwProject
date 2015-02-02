@@ -555,38 +555,146 @@ namespace MwProject
 
         #endregion
 
+        #region FindMerchant's Shops test case
+
+        public static bool Test_FindMerchantShops_ValidInput_MiddleRange()
+        {
+            MerchantIdCounter = 0;
+            MerchantShopSystem testMerchantShopSystem = CreateMiddleRangeDictionary();
+
+            Merchant testMerchant = new Merchant("Test1", "TestMerchant", "fastfood");
+            testMerchant.AddShop(new Shop("Shop1", "Small Bob"));
+            testMerchant.AddShop(new Shop("Shop2", "Big Bob"));
+            testMerchant.AddShop(new Shop("Shop3", "Medium Bob"));
+            testMerchantShopSystem.AddMerchant(testMerchant);
+
+            if (testMerchantShopSystem.FindShopsByMerchant("Test1").ContainsKey("Shop1") && testMerchantShopSystem.
+                FindShopsByMerchant("Test1").ContainsKey("Shop2") &&
+                testMerchantShopSystem.FindShopsByMerchant("Test1").ContainsKey("Shop3"))
+            {
+                return true;
+            }
+
+            throw new Exception();
+        }
+
+        #endregion
+
+        #region GetShopByType test cases
+
+        public static bool Test_GetMerchantsByType_Null_MiddleRange()
+        {
+            MerchantIdCounter = 0;
+            MerchantShopSystem testMerchantShopSystem = CreateMiddleRangeDictionary();
+
+            if (testMerchantShopSystem.GetShopsByMerchantType(null) == null)
+            {
+                return true;
+            }
+
+            throw new Exception();
+        }
+
+        public static bool Test_GetMerchantsByType_EmptyString_MiddleRange()
+        {
+            MerchantIdCounter = 0;
+            MerchantShopSystem testMerchantShopSystem = CreateMiddleRangeDictionary();
+
+            if (testMerchantShopSystem.GetShopsByMerchantType("") == null)
+            {
+                return true;
+            }
+
+            throw new Exception();
+        }
+
+        public static bool Test_GetMerchantsByType_Whitespace_MiddleRange()
+        {
+            MerchantIdCounter = 0;
+            MerchantShopSystem testMerchantShopSystem = CreateMiddleRangeDictionary();
+
+            if (testMerchantShopSystem.GetShopsByMerchantType("          ") == null)
+            {
+                return true;
+            }
+
+            throw new Exception();
+        }
+
+        public static bool Test_GetMerchantsByType_ValidTypeNotFound_MiddleRange()
+        {
+            MerchantIdCounter = 0;
+            MerchantShopSystem testMerchantShopSystem = CreateMiddleRangeDictionary();
+
+            if (testMerchantShopSystem.GetShopsByMerchantType("gaming") == null)
+            {
+                return true;
+            }
+
+            throw new Exception();
+        }
+
+        public static bool Test_GetMerchantsByType_ValidTypeFound_MiddleRange()
+        {
+            MerchantIdCounter = 0;
+            MerchantShopSystem testMerchantShopSystem = CreateMiddleRangeDictionary();
+
+            Merchant testMerchant = new Merchant("Test1", "TestMerchant", "testType");
+            testMerchant.AddShop(new Shop("Shop1", "Small Bob"));
+            testMerchant.AddShop(new Shop("Shop2", "Big Bob"));
+            testMerchant.AddShop(new Shop("Shop3", "Medium Bob"));
+            testMerchantShopSystem.AddMerchant(testMerchant);
+
+            if (testMerchantShopSystem.GetShopsByMerchantType("testType").Count == 3)
+            {
+                return true;
+            }
+            throw new Exception();
+        }
+
+
+
+        #endregion
 
 
         public static void RunAllTests()
         {
-            //Test_GetMerchant_EmptyString_MiddleRange();
-            //Test_GetMerchant_NonExistentId_MiddleRange();
-            //Test_GetMerchant_NonExistentId_50000();
-            //Test_GetMerchant_ExistentId_MiddleRange();
-            //Test_GetMerchant_ExistentId_50000();
-            //Test_GetMerchant_ExistentId_50001();
-            //Test_GetMerchant_Null_MiddleRange();
-            //Test_GetMerchant_WhiteSpace_MiddleRange();
+          /*Test_GetMerchant_EmptyString_MiddleRange();
+            Test_GetMerchant_NonExistentId_MiddleRange();
+            Test_GetMerchant_NonExistentId_50000();
+            Test_GetMerchant_ExistentId_MiddleRange();
+            Test_GetMerchant_ExistentId_50000();
+            Test_GetMerchant_ExistentId_50001();
+            Test_GetMerchant_Null_MiddleRange();
+            Test_GetMerchant_WhiteSpace_MiddleRange();
 
-            //Test_CreateMerchant_Null_NA();
-            //Test_CreateMerchant_Emptystring_NA();
-            //Test_CreateMerchant_WhiteSpace_NA();
-            //Test_CreateMerchant_ValidInput_NA();
+            Test_CreateMerchant_Null_NA();
+            Test_CreateMerchant_Emptystring_NA();
+            Test_CreateMerchant_WhiteSpace_NA();
+            Test_CreateMerchant_ValidInput_NA();
 
-            //Test_AddMerchant_Null_MiddleRange();
-            //Test_AddMerchant_ValidMerchantNotYetThere_EmptyDictionary();
-            //Test_AddMerchant_ValidMerchantNotYetThere_MiddleRange();
-            //Test_AddMerchant_ValidMerchantNotYetThere_50000Dictionary();
-            //Test_AddMerchant_ValidMerchantAlreadyThere_MiddleRange();
+            Test_AddMerchant_Null_MiddleRange();
+            Test_AddMerchant_ValidMerchantNotYetThere_EmptyDictionary();
+            Test_AddMerchant_ValidMerchantNotYetThere_MiddleRange();
+            Test_AddMerchant_ValidMerchantNotYetThere_50000Dictionary();
+            Test_AddMerchant_ValidMerchantAlreadyThere_MiddleRange();
 
-            //Test_AddShop_Null_NA();
-            //Test_AddShop_ValidShopNotYetThere_NA();
-            //Test_AddShop_ValidShopAlreadyThere_NA();
+            Test_AddShop_Null_NA();
+            Test_AddShop_ValidShopNotYetThere_NA();
+            Test_AddShop_ValidShopAlreadyThere_NA();
 
-            //Test_CreateShop_Null_NA();
-            //Test_CreateShop_Emptystring_NA();
-            //Test_CreateShop_WhiteSpace_NA();
-            //Test_CreateShop_ValidInput_NA();
+            Test_CreateShop_Null_NA();
+            Test_CreateShop_Emptystring_NA();
+            Test_CreateShop_WhiteSpace_NA();
+            Test_CreateShop_ValidInput_NA();
+
+            Test_GetMerchantsByType_Null_MiddleRange();
+            Test_GetMerchantsByType_EmptyString_MiddleRange();
+            Test_GetMerchantsByType_Whitespace_MiddleRange();
+            Test_GetMerchantsByType_ValidTypeNotFound_MiddleRange();
+            Test_GetMerchantsByType_ValidTypeFound_MiddleRange();
+
+            Test_FindMerchantShops_ValidInput_MiddleRange();*/
         }
 
         static int Main(string[] args)
