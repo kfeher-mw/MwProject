@@ -78,15 +78,15 @@ namespace MwProject
             return returnList;
         }
 
-        public static MerchantShopSystem CreateEmptyDictionary()
+        public static MerchantShopInMemory CreateEmptyDictionary()
         {
             Dictionary<string, Merchant> merchantDictionary = new Dictionary<string, Merchant>();
             Dictionary<string, List<Merchant>> merchantsByType = new Dictionary<string, List<Merchant>>();
-            MerchantShopSystem aMerchantShopSystem = new MerchantShopSystem(merchantDictionary, merchantsByType);
+            MerchantShopInMemory aMerchantShopSystem = new MerchantShopInMemory(merchantDictionary, merchantsByType);
             return aMerchantShopSystem;
         }
 
-        public static MerchantShopSystem Create50000Dictionary()
+        public static MerchantShopInMemory Create50000Dictionary()
         {
             int shopcount = 0;
             Dictionary<string, Merchant> merchantDictionary = new Dictionary<string, Merchant>();
@@ -116,11 +116,11 @@ namespace MwProject
                 }
             }
 
-            MerchantShopSystem aMerchantShopSystem = new MerchantShopSystem(merchantDictionary, merchantsByType);
+            MerchantShopInMemory aMerchantShopSystem = new MerchantShopInMemory(merchantDictionary, merchantsByType);
             return aMerchantShopSystem;
         }
 
-        public static MerchantShopSystem Create50001Dictionary()
+        public static MerchantShopInMemory Create50001Dictionary()
         {
             int shopcount = 0;
             Dictionary<string, Merchant> merchantDictionary = new Dictionary<string, Merchant>();
@@ -151,11 +151,11 @@ namespace MwProject
                 }
             }
 
-            MerchantShopSystem aMerchantShopSystem = new MerchantShopSystem(merchantDictionary, merchantsByType);
+            MerchantShopInMemory aMerchantShopSystem = new MerchantShopInMemory(merchantDictionary, merchantsByType);
             return aMerchantShopSystem;
         }
 
-        public static MerchantShopSystem CreateSoloDictionary()
+        public static MerchantShopInMemory CreateSoloDictionary()
         {
             Dictionary<string, Merchant> merchantDictionary = new Dictionary<string, Merchant>();
             Dictionary<string, List<Merchant>> merchantsByType = new Dictionary<string, List<Merchant>>();
@@ -163,11 +163,11 @@ namespace MwProject
 
             merchantDictionary.Add(lonelyMerchant.MerchantId, lonelyMerchant);
             merchantsByType.Add(lonelyMerchant.MerchantType, new List<Merchant>() { lonelyMerchant });
-            MerchantShopSystem aMerchantShopSystem = new MerchantShopSystem(merchantDictionary, merchantsByType);
+            MerchantShopInMemory aMerchantShopSystem = new MerchantShopInMemory(merchantDictionary, merchantsByType);
             return aMerchantShopSystem;
         }
 
-        public static MerchantShopSystem CreateMiddleRangeDictionary()
+        public static MerchantShopInMemory CreateMiddleRangeDictionary()
         {
             int shopcount = 0;
             Dictionary<string, Merchant> merchantDictionary = new Dictionary<string, Merchant>();
@@ -189,7 +189,7 @@ namespace MwProject
                 }
             }
 
-            MerchantShopSystem aMerchantShopSystem = new MerchantShopSystem(merchantDictionary, merchantsByType);
+            MerchantShopInMemory aMerchantShopSystem = new MerchantShopInMemory(merchantDictionary, merchantsByType);
             return aMerchantShopSystem;
         }
         
@@ -199,7 +199,7 @@ namespace MwProject
         public static bool Test_GetMerchant_Null_MiddleRange()
         {
             MerchantIdCounter = 0;
-            MerchantShopSystem testMerchantShopSystem = CreateMiddleRangeDictionary();
+            MerchantShopInMemory testMerchantShopSystem = CreateMiddleRangeDictionary();
             
             if (testMerchantShopSystem.GetMerchant(null) == null)
             {
@@ -213,7 +213,7 @@ namespace MwProject
         public static bool Test_GetMerchant_EmptyString_MiddleRange()
         {
             MerchantIdCounter = 0;
-            MerchantShopSystem testMerchantShopSystem = CreateMiddleRangeDictionary();
+            MerchantShopInMemory testMerchantShopSystem = CreateMiddleRangeDictionary();
 
             if (testMerchantShopSystem.GetMerchant("") == null)
             {
@@ -225,7 +225,7 @@ namespace MwProject
         public static bool Test_GetMerchant_WhiteSpace_MiddleRange()
         {
             MerchantIdCounter = 0;
-            MerchantShopSystem testMerchantShopSystem = CreateMiddleRangeDictionary();
+            MerchantShopInMemory testMerchantShopSystem = CreateMiddleRangeDictionary();
 
             if (testMerchantShopSystem.GetMerchant("       ") == null)
             {
@@ -237,7 +237,7 @@ namespace MwProject
         public static bool Test_GetMerchant_NonExistentId_MiddleRange()
         {
             MerchantIdCounter = 0;
-            MerchantShopSystem testMerchantShopSystem = CreateMiddleRangeDictionary();
+            MerchantShopInMemory testMerchantShopSystem = CreateMiddleRangeDictionary();
 
             if (testMerchantShopSystem.GetMerchant("Nonexistent") == null)
             {
@@ -249,7 +249,7 @@ namespace MwProject
         public static bool Test_GetMerchant_NonExistentId_50000()
         {
             MerchantIdCounter = 0;
-            MerchantShopSystem testMerchantShopSystem = Create50000Dictionary();
+            MerchantShopInMemory testMerchantShopSystem = Create50000Dictionary();
 
             if (testMerchantShopSystem.GetMerchant("Nonexistent") == null)
             {
@@ -262,7 +262,7 @@ namespace MwProject
         public static bool Test_GetMerchant_ExistentId_MiddleRange()
         {
             MerchantIdCounter = 0;
-            MerchantShopSystem testMerchantShopSystem = CreateMiddleRangeDictionary();
+            MerchantShopInMemory testMerchantShopSystem = CreateMiddleRangeDictionary();
 
             if (testMerchantShopSystem.GetMerchant("MIN5").MerchantId.Equals("MIN5"))
             {
@@ -274,7 +274,7 @@ namespace MwProject
         public static bool Test_GetMerchant_ExistentId_50000()
         {
             MerchantIdCounter = 0;
-            MerchantShopSystem testMerchantShopSystem = Create50000Dictionary();
+            MerchantShopInMemory testMerchantShopSystem = Create50000Dictionary();
 
             if (testMerchantShopSystem.GetMerchant("MIN50000").MerchantId.Equals("MIN50000"))
             {
@@ -287,7 +287,7 @@ namespace MwProject
         public static bool Test_GetMerchant_ExistentId_50001()
         {
             MerchantIdCounter = 0;
-            MerchantShopSystem testMerchantShopSystem = Create50001Dictionary();
+            MerchantShopInMemory testMerchantShopSystem = Create50001Dictionary();
 
             if (testMerchantShopSystem.GetMerchant("MIN50001").MerchantId.Equals("MIN50001"))
             {
@@ -368,7 +368,7 @@ namespace MwProject
         public static bool Test_AddMerchant_Null_MiddleRange()
         {
             MerchantIdCounter = 0;
-            MerchantShopSystem testMerchantShopSystem = CreateMiddleRangeDictionary();
+            MerchantShopInMemory testMerchantShopSystem = CreateMiddleRangeDictionary();
 
             if (testMerchantShopSystem.AddMerchant(null) == false)
             {
@@ -381,7 +381,7 @@ namespace MwProject
         public static bool Test_AddMerchant_ValidMerchantNotYetThere_EmptyDictionary()
         {
             MerchantIdCounter = 0;
-            MerchantShopSystem testMerchantShopSystem = CreateEmptyDictionary();
+            MerchantShopInMemory testMerchantShopSystem = CreateEmptyDictionary();
 
             testMerchantShopSystem.AddMerchant(new Merchant("NewMerchant", "MerchantName", "fastfood"));
 
@@ -397,7 +397,7 @@ namespace MwProject
         public static bool Test_AddMerchant_ValidMerchantNotYetThere_MiddleRange()
         {
             MerchantIdCounter = 0;
-            MerchantShopSystem testMerchantShopSystem = CreateMiddleRangeDictionary();
+            MerchantShopInMemory testMerchantShopSystem = CreateMiddleRangeDictionary();
 
             testMerchantShopSystem.AddMerchant(new Merchant("NewMerchant", "MerchantName", "fastfood"));
 
@@ -412,7 +412,7 @@ namespace MwProject
         public static bool Test_AddMerchant_ValidMerchantNotYetThere_50000Dictionary()
         {
             MerchantIdCounter = 0;
-            MerchantShopSystem testMerchantShopSystem = CreateMiddleRangeDictionary();
+            MerchantShopInMemory testMerchantShopSystem = CreateMiddleRangeDictionary();
 
             testMerchantShopSystem.AddMerchant(new Merchant("NewMerchant", "MerchantName", "fastfood"));
 
@@ -427,7 +427,7 @@ namespace MwProject
         public static bool Test_AddMerchant_ValidMerchantAlreadyThere_MiddleRange()
         {
             MerchantIdCounter = 0;
-            MerchantShopSystem testMerchantShopSystem = CreateMiddleRangeDictionary();
+            MerchantShopInMemory testMerchantShopSystem = CreateMiddleRangeDictionary();
 
             testMerchantShopSystem.AddMerchant(new Merchant("NewMerchant", "MerchantName", "fastfood"));
 
@@ -560,7 +560,7 @@ namespace MwProject
         public static bool Test_FindMerchantShops_ValidInput_MiddleRange()
         {
             MerchantIdCounter = 0;
-            MerchantShopSystem testMerchantShopSystem = CreateMiddleRangeDictionary();
+            MerchantShopInMemory testMerchantShopSystem = CreateMiddleRangeDictionary();
 
             Merchant testMerchant = new Merchant("Test1", "TestMerchant", "fastfood");
             testMerchant.AddShop(new Shop("Shop1", "Small Bob"));
@@ -585,7 +585,7 @@ namespace MwProject
         public static bool Test_GetMerchantsByType_Null_MiddleRange()
         {
             MerchantIdCounter = 0;
-            MerchantShopSystem testMerchantShopSystem = CreateMiddleRangeDictionary();
+            MerchantShopInMemory testMerchantShopSystem = CreateMiddleRangeDictionary();
 
             if (testMerchantShopSystem.GetShopsByMerchantType(null) == null)
             {
@@ -598,7 +598,7 @@ namespace MwProject
         public static bool Test_GetMerchantsByType_EmptyString_MiddleRange()
         {
             MerchantIdCounter = 0;
-            MerchantShopSystem testMerchantShopSystem = CreateMiddleRangeDictionary();
+            MerchantShopInMemory testMerchantShopSystem = CreateMiddleRangeDictionary();
 
             if (testMerchantShopSystem.GetShopsByMerchantType("") == null)
             {
@@ -611,7 +611,7 @@ namespace MwProject
         public static bool Test_GetMerchantsByType_Whitespace_MiddleRange()
         {
             MerchantIdCounter = 0;
-            MerchantShopSystem testMerchantShopSystem = CreateMiddleRangeDictionary();
+            MerchantShopInMemory testMerchantShopSystem = CreateMiddleRangeDictionary();
 
             if (testMerchantShopSystem.GetShopsByMerchantType("          ") == null)
             {
@@ -624,7 +624,7 @@ namespace MwProject
         public static bool Test_GetMerchantsByType_ValidTypeNotFound_MiddleRange()
         {
             MerchantIdCounter = 0;
-            MerchantShopSystem testMerchantShopSystem = CreateMiddleRangeDictionary();
+            MerchantShopInMemory testMerchantShopSystem = CreateMiddleRangeDictionary();
 
             if (testMerchantShopSystem.GetShopsByMerchantType("gaming") == null)
             {
@@ -637,7 +637,7 @@ namespace MwProject
         public static bool Test_GetMerchantsByType_ValidTypeFound_MiddleRange()
         {
             MerchantIdCounter = 0;
-            MerchantShopSystem testMerchantShopSystem = CreateMiddleRangeDictionary();
+            MerchantShopInMemory testMerchantShopSystem = CreateMiddleRangeDictionary();
 
             Merchant testMerchant = new Merchant("Test1", "TestMerchant", "testType");
             testMerchant.AddShop(new Shop("Shop1", "Small Bob"));
@@ -645,7 +645,7 @@ namespace MwProject
             testMerchant.AddShop(new Shop("Shop3", "Medium Bob"));
             testMerchantShopSystem.AddMerchant(testMerchant);
 
-            if (testMerchantShopSystem.GetShopsByMerchantType("testType").Count == 3)
+            if (testMerchantShopSystem.GetShopsByMerchantType("testType").ContainsKey("Test1"))
             {
                 return true;
             }
@@ -659,7 +659,7 @@ namespace MwProject
 
         public static void RunAllTests()
         {
-          /*Test_GetMerchant_EmptyString_MiddleRange();
+            Test_GetMerchant_EmptyString_MiddleRange();
             Test_GetMerchant_NonExistentId_MiddleRange();
             Test_GetMerchant_NonExistentId_50000();
             Test_GetMerchant_ExistentId_MiddleRange();
@@ -667,7 +667,7 @@ namespace MwProject
             Test_GetMerchant_ExistentId_50001();
             Test_GetMerchant_Null_MiddleRange();
             Test_GetMerchant_WhiteSpace_MiddleRange();
-
+            
             Test_CreateMerchant_Null_NA();
             Test_CreateMerchant_Emptystring_NA();
             Test_CreateMerchant_WhiteSpace_NA();
@@ -694,13 +694,18 @@ namespace MwProject
             Test_GetMerchantsByType_ValidTypeNotFound_MiddleRange();
             Test_GetMerchantsByType_ValidTypeFound_MiddleRange();
 
-            Test_FindMerchantShops_ValidInput_MiddleRange();*/
+            Test_FindMerchantShops_ValidInput_MiddleRange();
         }
 
         static int Main(string[] args)
         {
-            RunAllTests();
-            //Console.ReadLine();
+            //RunAllTests();
+            Console.WriteLine("Please choose if you would like in-memory or in-database access.");
+            Console.Write(@"Type either 'InMemory' or 'InDatabase': ");
+            String merchantSystemType = Console.ReadLine();
+            IMerchantShop merchantShop = new MerchantShopFactory().CreateMerchantShop((MerchantShopType)Enum.Parse(typeof(MerchantShopType), merchantSystemType, true));
+            merchantShop.GetShopsByMerchantType("retail");
+            Console.ReadLine();
             return 0;
         } 
     }

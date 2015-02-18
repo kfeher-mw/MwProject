@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace MwProject
 {
-    public class MerchantShopSystem
+    public class MerchantShopInMemory : IMerchantShop
     {
 
         private Dictionary<string, Merchant> merchantDictionary;
         private Dictionary<string, List<Merchant>> merchantsByType;
 
-        public MerchantShopSystem(Dictionary<string, Merchant> aMerchantDictionary, Dictionary<string, List<Merchant>> aMerchantByType)
+        public MerchantShopInMemory(){}
+        public MerchantShopInMemory(Dictionary<string, Merchant> aMerchantDictionary, Dictionary<string, List<Merchant>> aMerchantByType)
         {
             merchantDictionary = aMerchantDictionary;
             merchantsByType = aMerchantByType;
@@ -31,7 +32,7 @@ namespace MwProject
                 return null;
             }
 
-            if (DoesMerchantExist(merchantId))
+            if (merchantDictionary.ContainsKey(merchantId))
             {
                 return merchantDictionary[merchantId];
             }
@@ -45,7 +46,7 @@ namespace MwProject
         /// </summary>
         public Dictionary<string,Shop> FindShopsByMerchant(string merchantId)
         {
-            if (DoesMerchantExist(merchantId))
+            if (merchantDictionary.ContainsKey(merchantId))
             {
                 return GetMerchant(merchantId).ShopDictionary;
             }
@@ -56,26 +57,26 @@ namespace MwProject
         /// (3)	Finding all Shops for a given Merchant Type (i.e. all FastFood shops or all Electronics Shops)
         /// returns the specific type of merchants with their shops.
         /// </summary>
-        public List<Shop> GetShopsByMerchantType (string merchantType)
+        public Dictionary<string,List<Shop>> GetShopsByMerchantType (string merchantType)
         {
             if (String.IsNullOrWhiteSpace(merchantType) || !merchantsByType.ContainsKey(merchantType))
             {
                 return null;
             }
-            
-            List<Shop> returnList = new List<Shop>();
+
+            Dictionary<string, List<Shop>> returnDictionary = new Dictionary<string, List<Shop>>();
            
             foreach (Merchant merchant in merchantsByType[merchantType])
             {
-                returnList.AddRange(merchant.ShopDictionary.Values);
+                returnDictionary.Add(merchant.MerchantId, new List<Shop>(merchant.ShopDictionary.Values));
             }
 
-            return returnList;
+            return returnDictionary;
         }
 
         public bool AddMerchant(Merchant newMerchant)
         {
-            if (newMerchant == null || DoesMerchantExist(newMerchant.MerchantId))
+            if (newMerchant == null || merchantDictionary.ContainsKey(newMerchant.MerchantId))
             {
                 return false;
             }
@@ -102,16 +103,6 @@ namespace MwProject
             }
 
             return merchantDictionary.Remove(merchantId);
-        }
-
-        public bool DoesMerchantExist(string merchantId)
-        {
-            if (String.IsNullOrWhiteSpace(merchantId))
-            {
-                return false;
-            }
-
-            return (merchantDictionary.ContainsKey(merchantId));
         }
     }
 }
